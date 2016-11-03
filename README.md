@@ -60,7 +60,7 @@ $ sudo docker build -t journeycheng/web .
 ```
 
 ## step3: 定义服务
-使用docker-compose.yml定义一类服务。
+使用docker-compose.yml定义一整套服务。
 
 在目录中创建docker-compose.yml文件，内容如下：
 ```docker
@@ -74,8 +74,8 @@ services:
       - .:/code
     depends_on:
       - redis
-    redis:
-      image:redis
+  redis:
+    image:redis
 ```
 compose文件定义了两种服务，web和redis。
 － web服务：
@@ -99,10 +99,12 @@ web_1    |  * Restarting with stat
 web_1    |  * Debugger is active!
 ```
 
-在浏览器中输入http://host-ip:5000 就可以看到运行的应用了
+在浏览器中输入http://host-ip:5000 就可以看到运行的应用了:
+Hello World! I have been seen 1 times.
+（此处应有图片一张...）
 
 刷新网页，数字会增加
-
+Hello World! I have been seen 2 times.
 同时，在终端可以看到请求的记录：
 ```
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:46:00] "GET / HTTP/1.1" 200 -
@@ -111,11 +113,42 @@ web_1    | 192.168.140.197 - - [03/Nov/2016 07:47:52] "GET / HTTP/1.1" 200 -
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:48:36] "GET / HTTP/1.1" 200 -
 ```
 
-退出
+退出Ctrl + c
 ```
 ^CGracefully stopping... (press Ctrl+C again to force)
 Stopping composetest_web_1 ... 
 Stopping composetest_redis_1 ... 
 Killing composetest_web_1 ... done
 Killing composetest_redis_1 ... done
+```
+
+### 4.2 启动应用，后台运行
+如果你想在后台运行服务，可以在docker-compose up命令后增加－d （detached模式）
+```
+$ sudo docker-compose up -d
+Starting composetest_redis_1
+Starting composetest_web_1
+$ sudo docker-compose ps
+       Name                      Command               State           Ports          
+-------------------------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp               
+composetest_web_1     /bin/sh -c python app.py         Up      0.0.0.0:5000->5000/tcp
+```
+除此之外，还可以运行一些一次性的命令，比如查看web服务的环境变量
+```
+$ sudo docker-compose run web env
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=55b0348a8d6d
+TERM=xterm
+LANG=C.UTF-8
+GPG_KEY=C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF
+PYTHON_VERSION=2.7.12
+PYTHON_PIP_VERSION=8.1.2
+HOME=/root
+```
+### 4.3 停止后台运行的服务
+```
+$ sudo docker-compose stop
+Stopping composetest_web_1 ... done
+Stopping composetest_redis_1 ... done
 ```
