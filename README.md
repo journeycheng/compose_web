@@ -98,12 +98,19 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 web_1    |  * Restarting with stat
 web_1    |  * Debugger is active!
 ```
+
+在浏览器中输入http://host-ip:5000 就可以看到运行的应用了
+
+刷新网页，数字会增加
+
+同时，在终端可以看到请求的记录：
 ```
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:46:00] "GET / HTTP/1.1" 200 -
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:47:31] "GET / HTTP/1.1" 200 -
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:47:52] "GET / HTTP/1.1" 200 -
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:48:36] "GET / HTTP/1.1" 200 -
 ```
+
 退出
 ```
 ^CGracefully stopping... (press Ctrl+C again to force)
