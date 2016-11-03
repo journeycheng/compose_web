@@ -104,3 +104,11 @@ web_1    | 192.168.140.197 - - [03/Nov/2016 07:47:31] "GET / HTTP/1.1" 200 -
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:47:52] "GET / HTTP/1.1" 200 -
 web_1    | 192.168.140.197 - - [03/Nov/2016 07:48:36] "GET / HTTP/1.1" 200 -
 ```
+退出
+```
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping composetest_web_1 ... 
+Stopping composetest_redis_1 ... 
+Killing composetest_web_1 ... done
+Killing composetest_redis_1 ... done
+```
